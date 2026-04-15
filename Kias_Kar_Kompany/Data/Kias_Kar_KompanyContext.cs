@@ -12,6 +12,7 @@ namespace Kias_Kar_Kompany.Data
 
         public DbSet<Kias_Kar_Kompany.Models.Vehicle> Vehicle { get; set; } = default!;
         public DbSet<Kias_Kar_Kompany.Models.Manufacturer> Manufacturer { get; set; } = default!;
+        public DbSet<Kias_Kar_Kompany.Models.Owner> Owner { get; set; } = default!;
 
     }
 }

@@ -3,6 +3,7 @@ using Kias_Kar_Kompany.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kias_Kar_Kompany.Migrations
 {
     [DbContext(typeof(Kias_Kar_KompanyContext))]
-    partial class Kias_Kar_KompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20260408092911_SecondCommit")]
+    partial class SecondCommit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

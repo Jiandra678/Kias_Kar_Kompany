@@ -5,7 +5,7 @@ namespace Kias_Kar_Kompany.Models
     public class Manufacturer
     {
         [Key]
-        public int Id { get; set; }
+        public int Manufacturerid { get; set; }
 
         [Required]
         public string Manufacturer_Name { get; set; } = string.Empty;

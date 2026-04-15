@@ -19,6 +19,7 @@ namespace Kias_Kar_Kompany.Controllers
         // GET: VehiclesController
         public async Task<IActionResult> Index()
         {
+            var Kias_Kar_KompanyContext = _context.Vehicle.Include(e => e.Manufacturer).Include(e => e.Owner);
             return View(await _context.Vehicle.ToListAsync());
         }
 
