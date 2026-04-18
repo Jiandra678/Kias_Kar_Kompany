@@ -1,17 +1,18 @@
 ﻿@model Kias_Kar_Kompany.Models.Vehicle
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
 <h4>Vehicle</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VehicleId" />
             <div class="form-group">
                 <label asp-for="VehicleName" class="control-label"></label>
                 <input asp-for="VehicleName" class="form-control" />
@@ -40,13 +41,15 @@
             <div class="form-group">
                 <label asp-for="Ownerid" class="control-label"></label>
                 <select asp-for="Ownerid" class="form-control" asp-items="ViewBag.Ownerid"></select>
+                <span asp-validation-for="Ownerid" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Manufacturerid" class="control-label"></label>
                 <select asp-for="Manufacturerid" class="form-control" asp-items="ViewBag.Manufacturerid"></select>
+                <span asp-validation-for="Manufacturerid" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

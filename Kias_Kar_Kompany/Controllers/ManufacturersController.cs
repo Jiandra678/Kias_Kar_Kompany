@@ -15,25 +15,41 @@ namespace Kias_Kar_Kompany.Controllers
         {
             _context = context;
         }
-
-        // GET: ManufacturersController
-        public async Task<ActionResult> Index()
+         // GET: Manufacturers
+        public async Task<IActionResult> Index()
         {
-            var Kias_Kar_KompanyContext = _context.Vehicle.Include(e => e.Manufacturer).Include(e => e.Owner);
             return View(await _context.Manufacturer.ToListAsync());
         }
 
-        
-        // GET: ManufacturersController/Create
-        public ActionResult Create()
+        // GET: Manufacturers/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var manufacturer = await _context.Manufacturer
+                .FirstOrDefaultAsync(m => m.Manufacturerid == id);
+            if (manufacturer == null)
+            {
+                return NotFound();
+            }
+
+            return View(manufacturer);
+        }
+
+        // GET: Manufacturers/Create
+        public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ManufacturersController/Create
+        // POST: Manufacturers/Create
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Manufacturer manufacturer)
+        public async Task<IActionResult> Create([Bind("Manufacturerid,Manufacturer_Name,Manufacturer_Country")] Manufacturer manufacturer)
         {
             if (ModelState.IsValid)
             {
@@ -41,12 +57,96 @@ namespace Kias_Kar_Kompany.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            
             return View(manufacturer);
-            
         }
 
-        // GET: ManufacturersController/Edit/5
-        
+        // GET: Manufacturers/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var manufacturer = await _context.Manufacturer.FindAsync(id);
+            if (manufacturer == null)
+            {
+                return NotFound();
+            }
+            return View(manufacturer);
+        }
+
+        // POST: Manufacturers/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Manufacturerid,Manufacturer_Name,Manufacturer_Country")] Manufacturer manufacturer)
+        {
+            if (id != manufacturer.Manufacturerid)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(manufacturer);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ManufacturerExists(manufacturer.Manufacturerid))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(manufacturer);
+        }
+
+        // GET: Manufacturers/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var manufacturer = await _context.Manufacturer
+                .FirstOrDefaultAsync(m => m.Manufacturerid == id);
+            if (manufacturer == null)
+            {
+                return NotFound();
+            }
+
+            return View(manufacturer);
+        }
+
+        // POST: Manufacturers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var manufacturer = await _context.Manufacturer.FindAsync(id);
+            if (manufacturer != null)
+            {
+                _context.Manufacturer.Remove(manufacturer);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool ManufacturerExists(int id)
+        {
+            return _context.Manufacturer.Any(e => e.Manufacturerid == id);
+        }
     }
 }
+
+           
