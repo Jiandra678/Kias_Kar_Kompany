@@ -52,8 +52,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.VehicleType)
                 </td>
-                <td>
+                @* <td>
                     @Html.DisplayFor(modelItem => item.VehicleImageURL)
+                </td> *@
+                <td>
+                    @if (!string.IsNullOrEmpty(item.VehicleImageURL))
+                    {
+                        <img src="@item.VehicleImageURL" alt="@item.VehicleImageURL" style="width:100px;height:auto;" />
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Manufacturer.Manufacturer_Name)
